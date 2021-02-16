@@ -109,8 +109,8 @@ Developers need to understand the JSON structure of a component when `appending`
     "name": "image", 
     "source": "include", 
     "file": fileobj 
-    "content": "sample.png", // the name of the file or the url of the file if source is 'embed;
-    "aspect": "16:9" //applicable on for video component   
+    "content": "sample.png", 
+    "aspect": "16:9" 
 }
 ```
 
