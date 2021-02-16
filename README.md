@@ -115,7 +115,7 @@ Developers need to understand the JSON structure of a component when `appending`
     "no": 1,
     "name": "image", 
     "source": "include", 
-    "file": fileobj, 
+    "file": <fileobj>, 
     "content": "sample.png", 
     "aspect": "16:9" 
 }
@@ -222,3 +222,5 @@ This method is called to generate a `File` object of the open UMD object for fur
             // process error
         })
 ```      
+
+Copyright &copy; RmR
