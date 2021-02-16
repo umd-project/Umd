@@ -199,3 +199,19 @@ The creator and viewer programs call the following methods.
             // process error
         })
 ```      
+
+6. **Save File**
+
+This method is called to generate a `File` object of the open UMD object for further processing by the caller program.
+
+### Usage
+```javascript
+    _umd.save()
+        .then(file => {
+            // returns file object
+            // to be saved by the caller function
+        })
+        .catch(err => {
+            // process error
+        })
+```      
