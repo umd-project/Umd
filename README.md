@@ -108,7 +108,7 @@ Developers need to understand the JSON structure of a component when `appending`
     "no": 1,
     "name": "image", 
     "source": "include", 
-    "file": fileobj 
+    "file": fileobj, 
     "content": "sample.png", 
     "aspect": "16:9" 
 }
