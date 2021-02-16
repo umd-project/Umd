@@ -21,7 +21,14 @@ This class uses the zip utility developed by **Gildas**(*gildas-lormeau*). The r
 
 This creates a new Umd object and set default values (*see below*).
 ```javascript
-    const _umd = new Umd();
+    <script type="module">
+        
+        import Umd from "./Umd.min.js";
+        
+        const _umd = new Umd();
+
+    </script>
+
 ```
 
 ## Getters and Setters

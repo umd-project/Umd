@@ -1,9 +1,10 @@
-import { BlobReader, BlobWriter, ZipWriter, ZipReader, TextWriter, TextReader, Uint8ArrayReader, Uint8ArrayWriter, configure } from "@zip.js/zip.js";
-configure({useWebWorkers: true});
+import "./zip.min.js";
+
+zip.configure({useWebWorkers: true});
 
 export default class Umd {
     constructor() {
-        this._zip = new TextReader; //new zip.TextReader("");
+        this._zip = new zip.TextReader; //new zip.TextReader("");
         this._umlname = "contents.uml"; // being stored for future
         this._components = [];
         this._umlcontents = ""; // this is a string
@@ -15,6 +16,7 @@ export default class Umd {
     }
 
     // getters and setters
+
     get filename() {
         return this._filename;
     }
@@ -86,7 +88,7 @@ export default class Umd {
             try {
                 // create new zip object using fileobject
                 //this._zip = new zip.ZipReader(new zip.BlobReader(fileobj), {password: this._password});
-                this._zip = new ZipReader(new BlobReader(fileobj), {password: this._password});
+                this._zip = new zip.ZipReader(new zip.BlobReader(fileobj), {password: this._password});
                 // read list of zip content
                 const _list = await this._zip.getEntries();
                 // hold umlele
@@ -198,6 +200,7 @@ export default class Umd {
             else {
                 this._components.push(_jsn);
             }
+            //this.isEdited = true;
             this.hasChanged = true;
             resolve(_jsn.no);
         });
@@ -217,6 +220,7 @@ export default class Umd {
                 const _arr = new Uint8Array(_filebuffer);
                 _jsn.data.arraybuffer = _arr;
             }
+            //this.isEdited = true;
             this.hasChanged = true;
             resolve();
         });
@@ -276,15 +280,13 @@ export default class Umd {
         return new Promise(async resolve => {
             // instantiate new object 
             //const _blobWriter = new zip.BlobWriter("application/zip");
-            const _blobWriter = new BlobWriter("application/zip");
-            //this._zip = new zip.ZipWriter(_blobWriter, {password: this._password});
-            this._zip = new ZipWriter(_blobWriter, {password: this._password});
+            const _blobWriter = new zip.BlobWriter("application/zip");
+            this._zip = new zip.ZipWriter(_blobWriter, {password: this._password});
 
             // first generate uml
             this._generateUml();
             // first add the uml to zip
-            //await this._zip.add("contents.uml", new zip.TextReader(this._umlcontents));
-            await this._zip.add("contents.uml", new TextReader(this._umlcontents));
+            await this._zip.add("contents.uml", new zip.TextReader(this._umlcontents));
 
             // sort components
             this._components.sort(function (a, b) {
@@ -297,7 +299,7 @@ export default class Umd {
                 // check for include
                 if (_component.data.source == "include") {
                     //await this._zip.add(_component.data.content, new zip.Uint8ArrayReader(_component.data.arraybuffer));
-                    await this._zip.add(_component.data.content, new Uint8ArrayReader(_component.data.arraybuffer));
+                    await this._zip.add(_component.data.content, new zip.Uint8ArrayReader(_component.data.arraybuffer));
                 }
             };
             // close the Zip
