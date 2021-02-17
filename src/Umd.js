@@ -1,4 +1,4 @@
-import "./zip.min.js";
+import "../zip.min.js";
 
 zip.configure({useWebWorkers: true});
 
@@ -106,13 +106,13 @@ export default class Umd {
                     if (_ext == "uml") { // read as text
                         _umlele = _ele;
                         this._umlcontents = await _ele.getData(
-                            new TextWriter(),
+                            new zip.TextWriter(),
                         );
                         _includearr.push({"filename": _ele.filename, "contents": this._umlcontents});
                     }
                     else { // read as blob
                         const _array = await _ele.getData(
-                            new Uint8ArrayWriter(),
+                            new zip.Uint8ArrayWriter(),
                         );
                         _includearr.push({"filename": _ele.filename, "contents": _array});
                     }
@@ -189,7 +189,7 @@ export default class Umd {
                 const _filebuffer = await this._readBuffer(component.file);
 
                 // convert to uint8array
-                const _arr = new Uint8Array(_filebuffer);
+                const _arr = new zip.Uint8Array(_filebuffer);
 
                 // convert to blob and store
                 _jsn.data.arraybuffer = _arr;
