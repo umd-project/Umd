@@ -1,4 +1,4 @@
-import "../zip.min.js";
+import "./zip.min.js";
 
 zip.configure({useWebWorkers: true});
 
@@ -188,8 +188,9 @@ export default class Umd {
                 // read the contents of the file
                 const _filebuffer = await this._readBuffer(component.file);
 
-                // convert to uint8array
-                const _arr = new zip.Uint8Array(_filebuffer);
+                // convert to uint8array CHANGED HERE
+                
+                const _arr = new Uint8Array(_filebuffer);
 
                 // convert to blob and store
                 _jsn.data.arraybuffer = _arr;
@@ -216,7 +217,7 @@ export default class Umd {
                 // read the contents of the file
                 const _filebuffer = await this._readBuffer(component.file);
 
-                // convert to uint8array
+                // convert to uint8array HERE
                 const _arr = new Uint8Array(_filebuffer);
                 _jsn.data.arraybuffer = _arr;
             }
